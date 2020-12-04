@@ -1,10 +1,12 @@
 class Coin {
   constructor() {
 
-    this.r = 50;
+    this.r = 100;
 
     this.x = random(w);
     this.y = 0 - this.r;
+
+
 
 
 
@@ -13,11 +15,13 @@ class Coin {
 
 
 display(){
-  rect(this.x, this.y,this.r, this.r);
+
   image(coinImg,this.x, this.y,this.r, this.r);
 
 }
   move(){
-    this.y++;
+    this.y+= 2.3;
+
   }
+
 }

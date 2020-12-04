@@ -4,8 +4,8 @@
 let state = 'title';
 let cnv;
 let points = 0;
-let w = 400;
-let h = 400;
+let w = 800;
+let h =  450;
 let player;
 let coins = [];
 let playerImg;
@@ -14,7 +14,7 @@ let coinImg;
 
 function preload(){
   playerImg = loadImage('assets/player.png');
-  coinImg = loadImage('assets/coin.jpg');
+  coinImg = loadImage('assets/infected.png');
 }
 
 
@@ -39,8 +39,8 @@ function draw() {
       level1();
       cnv.mouseClicked(level1MouseClicked);
       break;
-    case 'YOU WIN':
-      youWin();
+      case 'GAME OVER!':
+      infected();
       cnv.mouseClicked(youWinMouseClicked);
       break;
     default:
@@ -68,12 +68,15 @@ function keyPressed() {
 
 function title() {
   background(0);
-  textSize(10);
+  textSize(50);
   fill(255);
   textAlign(CENTER);
-  text('VIRUS', w / 2, h / 5);
+  text('SOCIAL DISTANCING: THE GAME', w / 2, h / 5);
+  textSize(25);
+  text('Avoid the infected for as long as possible', width / 2, h / 3);
+
   text('click anywhere to start', width / 2, h / 2);
-  textSize(10);
+  textSize(50);
 
 }
 
@@ -86,14 +89,19 @@ function titleMouseClicked() {
 
 function level1() {
   background(50, 150, 200);
-  text('DIO!', 0, height - 50);
   textSize(30);
-  text('ORA ORA ORAs:' + points, 0, height - 10);
+  text('CONTACT WITH INFECTED:' + points, 200, height - 10);
   textSize(30);
 
 
+if (points >= 10) {
+  state = 'GAME OVER!';
 
-  if (random(1) <= 0.01) {
+}
+
+
+
+  if (random(1) <= .05) {
     coins.push(new Coin());
   }
 
@@ -142,20 +150,17 @@ coins.forEach(function(coin) {
 
 function level1MouseClicked() {
 
-  // points++;
-  // if(points >= 10){
-  //   state = 'YOU WIN';
-  // }
+
 }
 
 
 
-function youWin() {
+function infected() {
   background(255, 50, 80);
-  textSize(80);
+  textSize(30);
   stroke(255);
-  text('ROADA ROLLA DA', 100, 100);
-  text('click anywhere to re-start', 70, 300);
+  text('YOU GOT INFECTED!', 350, 100);
+  text('click anywhere to re-start', 350, 300);
   textSize(10);
 }
 

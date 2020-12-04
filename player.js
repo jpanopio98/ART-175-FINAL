@@ -1,6 +1,6 @@
 class Player {
   constructor() {
-    this.r = 60;
+    this.r = 100;
     this.x = w/2;
     this.y = h - this.r;
     this.direction = 'still';
