@@ -18,7 +18,7 @@ function preload() {
   playerImg = loadImage('assets/player.png'); //preloads the images
   enemyImg = loadImage('assets/infected.png');
 
-  //sound effect found on http://soundbible.com/995-Jab.html
+  //sound effect found on http://soundbible.com/855-Cough.html
   damageSound = loadSound('assets/damage.mp3'); //pre-load sound effect
 }
 
