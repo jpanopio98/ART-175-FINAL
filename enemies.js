@@ -1,5 +1,5 @@
 class Enemy {
-  constructor() {
+  constructor() { //instructions on how to set up the object
 
     this.r = 100;
 
@@ -14,13 +14,13 @@ class Enemy {
   }
 
 
-display(){
+  display() {
 
-  image(enemyImg,this.x, this.y,this.r, this.r);
+    image(enemyImg, this.x, this.y, this.r, this.r); //displays image
 
-}
-  move(){
-    this.y+= 2.3;
+  }
+  move() { //movement speed
+    this.y += 2.3;
 
   }
 

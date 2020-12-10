@@ -3,17 +3,16 @@ html, body {
   padding: 0;
   background-color: #232020;
   color: white;
-    font: 50 35px 'Lato', sans-serif;
-    text-align: center;
+  font: 50 35px 'Lato', sans-serif;
+  text-align: center;
 }
+
 canvas {
   display: block;
-  margin:50px auto 50px auto;
-
+  margin: 50px auto 50px auto;
 }
 
-p{
+p {
   margin: auto;
   padding: 0;
-
 }

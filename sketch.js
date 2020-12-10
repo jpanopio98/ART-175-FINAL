@@ -5,21 +5,21 @@ let state = 'title';
 let cnv;
 let points = 0;
 let w = 800;
-let h =  450;
+let h = 450;
 let player;
 let enemies = [];
 let playerImg;
 let enemyImg;
 let damageSound;
 
-function preload(){
+function preload() {
 
   //character assets made by me
   playerImg = loadImage('assets/player.png'); //preloads the images
   enemyImg = loadImage('assets/infected.png');
 
   //sound effect found on http://soundbible.com/995-Jab.html
-  damageSound = loadSound('assets/damage.mp3');//pre-load sound effect
+  damageSound = loadSound('assets/damage.mp3'); //pre-load sound effect
 }
 
 
@@ -39,13 +39,13 @@ function draw() {
   switch (state) {
     case 'title':
       title();
-      cnv.mouseClicked(titleMouseClicked);///when mouse is click event occurs
+      cnv.mouseClicked(titleMouseClicked); ///when mouse is click event occurs
       break;
     case 'level 1':
       level1();
       cnv.mouseClicked(level1MouseClicked);
       break;
-      case 'GAME OVER!':
+    case 'GAME OVER!':
       infected();
       cnv.mouseClicked(restart);
       break;
@@ -105,10 +105,10 @@ function level1() {
   textSize(30);
 
 
-if (points >= 10) {
-  state = 'GAME OVER!';//game over screen
+  if (points >= 10) {
+    state = 'GAME OVER!'; //game over screen
 
-}
+  }
 
 
   //determines the number of objects spawning
@@ -118,33 +118,33 @@ if (points >= 10) {
 
 
 
-    player.display();// displays player
-    player.move();// allows player to move
+  player.display(); // displays player
+  player.move(); // allows player to move
 
 
 
-enemies.forEach(function(enemies) {
+  enemies.forEach(function(enemies) {
 
-  enemies.display();//displays the enemy
-  enemies.move();//allows for enemy movement along the y axis
-
-
-})
+    enemies.display(); //displays the enemy
+    enemies.move(); //allows for enemy movement along the y axis
 
 
+  })
 
 
 
-  for (let i = enemies.length -1; i >= 0; i--) {
+
+
+  for (let i = enemies.length - 1; i >= 0; i--) {
 
     //check for collision, if there is collision then increase point by 1
     if (dist(player.x, player.y, enemies[i].x, enemies[i].y) <= (player.r + enemies[i].r) / 2) {
       points++; //adds points whenever player comes into contact with enemy
       console.log(points);
-      enemies.splice(i,1);//de-spawns enemy objects
-      damageSound.play();//plays sound whenever player is damaged
-    }else if (enemies[i].y > h) {
-      enemies.splice(i,1);
+      enemies.splice(i, 1); //de-spawns enemy objects
+      damageSound.play(); //plays sound whenever player is damaged
+    } else if (enemies[i].y > h) {
+      enemies.splice(i, 1);
     }
 
   }
