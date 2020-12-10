@@ -10,16 +10,22 @@ let player;
 let enemies = [];
 let playerImg;
 let enemyImg;
-
+let damageSound;
 
 function preload(){
+
+  //character assets made by me
   playerImg = loadImage('assets/player.png'); //preloads the images
   enemyImg = loadImage('assets/infected.png');
+
+  //sound effect found on http://soundbible.com/995-Jab.html
+  damageSound = loadSound('assets/damage.mp3');//pre-load sound effect
 }
 
 
 
 function setup() {
+  soundFormats('mp3');
   cnv = createCanvas(w, h);
   textFont('monospace');
   player = new Player();
@@ -33,7 +39,7 @@ function draw() {
   switch (state) {
     case 'title':
       title();
-      cnv.mouseClicked(titleMouseClicked);
+      cnv.mouseClicked(titleMouseClicked);///when mouse is click event occurs
       break;
     case 'level 1':
       level1();
@@ -120,7 +126,7 @@ if (points >= 10) {
 enemies.forEach(function(enemies) {
 
   enemies.display();//displays the enemy
-  enemies.move();//allows for enemy movement along the y axis 
+  enemies.move();//allows for enemy movement along the y axis
 
 
 })
@@ -136,6 +142,7 @@ enemies.forEach(function(enemies) {
       points++; //adds points whenever player comes into contact with enemy
       console.log(points);
       enemies.splice(i,1);//de-spawns enemy objects
+      damageSound.play();//plays sound whenever player is damaged
     }else if (enemies[i].y > h) {
       enemies.splice(i,1);
     }
