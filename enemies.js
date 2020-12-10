@@ -1,4 +1,4 @@
-class Coin {
+class Enemy {
   constructor() {
 
     this.r = 100;
@@ -16,7 +16,7 @@ class Coin {
 
 display(){
 
-  image(coinImg,this.x, this.y,this.r, this.r);
+  image(enemyImg,this.x, this.y,this.r, this.r);
 
 }
   move(){

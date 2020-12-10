@@ -7,14 +7,14 @@ let points = 0;
 let w = 800;
 let h =  450;
 let player;
-let coins = [];
+let enemies = [];
 let playerImg;
-let coinImg;
+let enemyImg;
 
 
 function preload(){
-  playerImg = loadImage('assets/player.png');
-  coinImg = loadImage('assets/infected.png');
+  playerImg = loadImage('assets/player.png'); //preloads the images
+  enemyImg = loadImage('assets/infected.png');
 }
 
 
@@ -23,13 +23,13 @@ function setup() {
   cnv = createCanvas(w, h);
   textFont('monospace');
   player = new Player();
-  // coins[0] = new Coin();
-  coins.push(new Coin);
+
+  enemies.push(new Enemy);
 }
 
 function draw() {
 
-
+  //switch statements for events
   switch (state) {
     case 'title':
       title();
@@ -41,7 +41,7 @@ function draw() {
       break;
       case 'GAME OVER!':
       infected();
-      cnv.mouseClicked(youWinMouseClicked);
+      cnv.mouseClicked(restart);
       break;
     default:
       break;
@@ -51,7 +51,7 @@ function draw() {
 
 }
 
-
+//function when keys are pressed by user.
 function keyPressed() {
   if (keyCode == LEFT_ARROW) {
     player.direction = 'left';
@@ -66,6 +66,7 @@ function keyPressed() {
   }
 }
 
+//title screen
 function title() {
   background(0);
   textSize(50);
@@ -80,13 +81,17 @@ function title() {
 
 }
 
+
+//function for when user clicks on screen
 function titleMouseClicked() {
 
-  console.log('canvas is clicked on title page');
+
   state = 'level 1';
 
 }
 
+//level 1 function
+//spawns enemies and allows player to move around
 function level1() {
   background(50, 150, 200);
   textSize(30);
@@ -95,34 +100,27 @@ function level1() {
 
 
 if (points >= 10) {
-  state = 'GAME OVER!';
+  state = 'GAME OVER!';//game over screen
 
 }
 
 
-
+  //determines the number of objects spawning
   if (random(1) <= .05) {
-    coins.push(new Coin());
+    enemies.push(new Enemy()); //enemy spawn
   }
 
 
 
-    player.display();
-    player.move();
+    player.display();// displays player
+    player.move();// allows player to move
 
-//iterating through coins array to display and move them
-// using for loop
-// for (let i = 0; i < coins.length; i++) {
-//   coins[i].display();
-//   coins[i].move();
-// }
 
-// using for each method
 
-coins.forEach(function(coin) {
+enemies.forEach(function(enemies) {
 
-  coin.display();
-  coin.move();
+  enemies.display();//displays the enemy
+  enemies.move();//allows for enemy movement along the y axis 
 
 
 })
@@ -131,15 +129,15 @@ coins.forEach(function(coin) {
 
 
 
-  for (let i = coins.length -1; i >= 0; i--) {
+  for (let i = enemies.length -1; i >= 0; i--) {
 
     //check for collision, if there is collision then increase point by 1
-    if (dist(player.x, player.y, coins[i].x, coins[i].y) <= (player.r + coins[i].r) / 2) {
-      points++;
+    if (dist(player.x, player.y, enemies[i].x, enemies[i].y) <= (player.r + enemies[i].r) / 2) {
+      points++; //adds points whenever player comes into contact with enemy
       console.log(points);
-      coins.splice(i,1);
-    }else if (coins[i].y > h) {
-      coins.splice(i,1);
+      enemies.splice(i,1);//de-spawns enemy objects
+    }else if (enemies[i].y > h) {
+      enemies.splice(i,1);
     }
 
   }
@@ -148,13 +146,14 @@ coins.forEach(function(coin) {
 
 }
 
-function level1MouseClicked() {
 
+//filler function that allows for mouse clicking event
+function level1MouseClicked() {
 
 }
 
 
-
+//game over function
 function infected() {
   background(255, 50, 80);
   textSize(30);
@@ -164,7 +163,8 @@ function infected() {
   textSize(10);
 }
 
-function youWinMouseClicked() {
+//function that allows the player to restart after clicking the screen
+function restart() {
   state = 'level 1';
   points = 0;
 }
